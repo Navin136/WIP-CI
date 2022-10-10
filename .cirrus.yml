@@ -1,0 +1,26 @@
+env:
+  CIRRUS_CLONE_DEPTH: "1"
+  BOT_TOKEN: ""
+  CHAT_ID: ""
+  RCLONE_CONFIG: ""
+  WORKDIR: "/tmp"
+
+task:
+  name: "Build"
+  timeout_in: 120m
+  container:
+    image: navin136/builder:latest
+    cpu: 8
+    memory: 32G
+
+  Setup-env_variables:
+     - bash scripts/env.sh
+
+  Import_ccache:
+     - bash scripts/ccache.sh
+
+  Sync-and_build:
+     - bash scripts/sync_build.sh
+
+  Telegram-notify_script:
+     - bash scripts/notify.sh
