@@ -16,8 +16,8 @@ task:
   Setup-env_variables:
      - bash scripts/env.sh
 
-  Import_ccache:
-     - bash scripts/ccache.sh
+  Import-uploaded_dump:
+     - bash scripts/import_cc.sh
 
   Sync-and_build:
      - bash scripts/sync_build.sh
