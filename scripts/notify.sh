@@ -25,7 +25,7 @@ then
 	msg "<b>Uploaded Successfully ...</b>%0A<b>Link: </b><code>$(rclone link nk:$ZIPNAME)</code>"
 else
 	msg "<b>Build Not Completed ....</b>%0A<b>Uploading ccache</b>"
-	cd $WORK_PATH
+	cd /home/navin
 	tar --use-compress-program="pigz -k -1" -cf ccache.tar.gz ccache/ || { echo "Failed to Compress ccache !!!" && exit 1; } # pigz for faster compressing
 	rclone copy -P --drive-chunk-size 256M ccache.tar.gz nk: || { echo "Failed to Upload ccache !!!" && exit 1; } # Upload ccache
 fi

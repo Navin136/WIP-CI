@@ -27,4 +27,5 @@ git clone https://github.com/X00T-dev/vendor_asus vendor/asus --depth=1 || { ech
 git clone https://github.com/X00T-dev/kernel_asus_sdm660_Arrow kernel_asus_sdm660 --depth=1 || { echo "Failed to clone kernel tree !!!" && msg "<b>Failed to clone kernel tree !!</b>"  && exit 1; }
 ccache -M 10G
 ccache -z
+pwd
 bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
