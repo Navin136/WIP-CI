@@ -24,7 +24,7 @@ bash -c "$(head $CIRRUS_WORKING_DIR/build.sh -n 4)"  || { echo "Failed to Init a
 msg "<b>Repo Sync Completed :)</b>"
 git clone https://github.com/X00T-dev/device_asus_X00T device/asus/X00T --depth=1  || { echo "Failed to clone device tree !!!" && msg "<b>Failed to clone device tree !!</b>" && exit 1; }
 git clone https://github.com/X00T-dev/vendor_asus vendor/asus --depth=1 || { echo "Failed to clone vendor tree !!!" && msg "<b>Failed to clone vendor tree !!</b>" && exit 1; }
-git clone https://github.com/X00T-dev/kernel_asus_sdm660_Arrow kernel_asus_sdm660 --depth=1 || { echo "Failed to clone kernel tree !!!" && msg "<b>Failed to clone kernel tree !!</b>"  && exit 1; }
+git clone https://github.com/X00T-dev/kernel_asus_sdm660_Arrow kernel/asus/sdm660 --depth=1 || { echo "Failed to clone kernel tree !!!" && msg "<b>Failed to clone kernel tree !!</b>"  && exit 1; }
 ccache -M 10G
 ccache -z
 pwd
