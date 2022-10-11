@@ -18,13 +18,15 @@ file() {
 
 FILENAME=$WORK_PATH/$ROM_NAME/out/target/product/$DEVICE/*$DEVICE*.zip
 ZIPNAME=$(echo $FILENAME | cut -d '/' -f 7)
-if [ -z $WORK_PATH/$ROM_NAME/out/target/product/$DEVICE/*$DEVICE*.zip ]
-	msg "<b>Build Not Completed ....</b>%0A<b>Uploading ccache</b>"
-	tar --use-compress-program="pigz -k 1 " -cf ccache.tar.gz $WORK_PATH/ccache # pigz for faster compressing
-	rclone copy -P --drive-chunk-size 256M ccache.tar.gz nk: # Upload ccache
-else
+if [ -f $WORK_PATH/$ROM_NAME/out/target/product/$DEVICE/*$DEVICE*.zip ]
+then
 	msg "<b>Build Completed ....</b>%0A<b>Uploading to Team drive</b>"
 	rclone copy -P $WORK_PATH/$ROM_NAME/out/target/product/$DEVICE/*$DEVICE*.zip nk:/$ZIPNAME
 	msg "<b>Uploaded Successfully ...</b>%0A<b>Link: </b><code>$(rclone link nk:$ZIPNAME)</code>"
+else
+	msg "<b>Build Not Completed ....</b>%0A<b>Uploading ccache</b>"
+	cd $WORK_PATH
+	tar --use-compress-program="pigz -k -1" -cf ccache.tar.gz ccache/ || { echo "Failed to Compress ccache !!!" && exit 1; } # pigz for faster compressing
+	rclone copy -P --drive-chunk-size 256M ccache.tar.gz nk: || { echo "Failed to Upload ccache !!!" && exit 1; } # Upload ccache
 fi
 
