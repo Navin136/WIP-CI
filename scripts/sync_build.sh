@@ -16,6 +16,8 @@ file() {
         -F caption=" <b>MD5 Checksum : </b><code>$MD5</code>"
 }
 ROM_NAME=$(grep epo $CIRRUS_WORKING_DIR/build.sh -m1 | cut -d / -f4)
+echo "Building $ROM_NAME"
+echo "Current dir is $WORK_PATH"
 DEVICE=$(grep unch $CIRRUS_WORKING_DIR/build.sh | cut -d '-' -f1 | cut -d ' ' -f2 | cut -d '_' -f2)
 mkdir $WORK_PATH/$ROM_NAME
 cd $WORK_PATH/$ROM_NAME
@@ -25,7 +27,12 @@ msg "<b>Repo Sync Completed :)</b>"
 git clone https://github.com/X00T-dev/device_asus_X00T device/asus/X00T --depth=1  || { echo "Failed to clone device tree !!!" && msg "<b>Failed to clone device tree !!</b>" && exit 1; }
 git clone https://github.com/X00T-dev/vendor_asus vendor/asus --depth=1 || { echo "Failed to clone vendor tree !!!" && msg "<b>Failed to clone vendor tree !!</b>" && exit 1; }
 git clone https://github.com/X00T-dev/kernel_asus_sdm660_Arrow kernel/asus/sdm660 --depth=1 || { echo "Failed to clone kernel tree !!!" && msg "<b>Failed to clone kernel tree !!</b>"  && exit 1; }
+export USE_CCACHE=1
+export CCACHE_EXEC=$(which ccache)
+export CCACHE_DIR=$WORK_PATH/ccache
+export CCACHE_COMPRESS=true
 ccache -M 10G
 ccache -z
 pwd
 bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
+file "build.log"
