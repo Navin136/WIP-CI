@@ -35,4 +35,4 @@ ccache -M 10G
 ccache -z
 pwd
 bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
-file "build.log"
+file build.log
