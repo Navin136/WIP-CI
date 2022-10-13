@@ -18,5 +18,10 @@ task:
   Sync-build_script:
      - bash scripts/sync_build.sh
 
+  Ccache-details_script:
+     - set -e
+     - export CCACHE_DIR=$WORK_PATH/ccache
+     - ccache -s
+
   Telegram-notify_script:
      - bash scripts/notify.sh

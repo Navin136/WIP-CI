@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 msg() {
         curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendMessage" \
         -d chat_id="$CHAT_ID" \
@@ -35,4 +36,3 @@ ccache -M 10G
 ccache -z
 pwd
 bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
-file build.log
