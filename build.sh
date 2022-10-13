@@ -4,4 +4,4 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 repo sync --fail-fast -j8 # to sync failed repo if .......
 . build/envsetup.sh
 lunch arrow_X00T-eng
-mka bacon -j8 |& tee build.log & sleep 30m
+mka bacon -j8 |& tee build.log & sleep 95m
