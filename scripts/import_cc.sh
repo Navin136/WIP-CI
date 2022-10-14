@@ -1,4 +1,6 @@
 #!/bin/bash
+free -h
+nproc --all
 cd $WORK_PATH
 #mkdir -p /home/navin/.config
 #mkdir -p /home/navin/.config/rclone
