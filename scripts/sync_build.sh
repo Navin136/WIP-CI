@@ -35,8 +35,4 @@ export CCACHE_COMPRESS=true
 ccache -M 10G
 ccache -z
 pwd
-# To fix OOM, build by parts
-make api-stubs-docs || echo no problem
-make system-api-stubs-docs || echo no problem
-make test-api-stubs-docs || echo no problem
-bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
+bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 6)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
