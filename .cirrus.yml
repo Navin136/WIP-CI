@@ -12,16 +12,16 @@ task:
     cpu: 8
     memory: 32G
 
-  Import-uploaded_script:
-     - bash scripts/import_cc.sh
+  Test-swap_script:
+     - bash nk.sh
 
-  Sync-build_script:
-     - bash scripts/sync_build.sh
+#  Sync-build_script:
+#     - bash scripts/sync_build.sh
 
-  Ccache-details_script:
-     - set -e
-     - export CCACHE_DIR=$WORK_PATH/ccache
-     - ccache -s
+#  Ccache-details_script:
+#     - set -e
+#     - export CCACHE_DIR=$WORK_PATH/ccache
+#     - ccache -s
 
-  Telegram-notify_script:
-     - bash scripts/notify.sh
+#  Telegram-notify_script:
+#     - bash scripts/notify.sh
