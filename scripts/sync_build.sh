@@ -32,7 +32,8 @@ export USE_CCACHE=1
 export CCACHE_EXEC=$(which ccache)
 export CCACHE_DIR=$WORK_PATH/ccache
 export CCACHE_COMPRESS=true
-ccache -M 20G
+ccache -o compression=true # some roms use this in envsetup
+ccache -M 75G
 ccache -z
 pwd
 bash -c "$(tail $CIRRUS_WORKING_DIR/build.sh -n 3)" || { echo "Failed to Start build !!!" && msg "<b>Failed to Start build !!</b>" && exit 1; }
