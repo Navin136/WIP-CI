@@ -32,7 +32,6 @@ then
 	comp ccache 1
         rclone copy -P --drive-chunk-size 256M ccache.tar.gz nk: || { echo "Failed to Upload ccache !!!" && exit 1; } # Upload ccache
 else
-	file $DEVICE/build.log
 	msg "<b>Build Not Completed ....</b>%0A<b>Uploading ccache</b>"
 	comp ccache 1
 	rclone copy -P --drive-chunk-size 256M ccache.tar.gz nk: || { echo "Failed to Upload ccache !!!" && exit 1; } # Upload ccache
