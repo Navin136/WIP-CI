@@ -4,4 +4,5 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 repo sync --fail-fast -j$(nproc --all)  # to sync failed repo if .......
 . build/envsetup.sh
 lunch arrow_X00T-eng
-mka bacon -j$(nproc --all) |& tee build.log & sleep 90m
+mka api-stubs-docs && mka module-lib-api-stubs-docs && mka system-api-stubs-docs && mka test-api-stubs-docs
+mka bacon -j1 |& tee build.log & sleep 90m
